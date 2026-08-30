@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUANT/DESK — Placement Prep Terminal</title>
+<!--
+  ─── SUPABASE SETUP (3 steps) ───────────────────────────────────
+  1. Create a free project at supabase.com, then run the SQL in
+     supabase-setup.sql (SQL Editor → New query → paste → Run).
+  2. In Authentication → Providers → Email: turn OFF
+     "Confirm email" (so signup works instantly).
+  3. Paste your Project URL + anon public key into the CONFIG
+     block at the top of app.js, then host this file
+     anywhere (GitHub Pages / Netlify / Vercel).
+  With CONFIG empty the site runs in LOCAL mode (single device).
+  ────────────────────────────────────────────────────────────────
+-->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="kicker">Placement Desk · Est. 2026</div>
+    <h2>QUANT/DESK<span class="cursor"></span></h2>
+    <span class="gate-mode local" id="gateMode">LOCAL MODE</span>
+    <div class="gate-sub" id="gateSub"></div>
+    <div id="fEmailWrap" style="display:none">
+      <label for="gEmail">Email</label>
+      <input id="gEmail" type="email" autocomplete="email" placeholder="you@college.edu">
+    </div>
+    <div id="fUserWrap">
+      <label for="gName">Desk name <span style="text-transform:none;letter-spacing:0">(shows on leaderboard)</span></label>
+      <input id="gName" maxlength="16" autocomplete="off" placeholder="e.g. delta_one">
+    </div>
+    <label for="gPin" id="gPinLbl">PIN (4–6 digits)</label>
+    <input id="gPin" type="password" maxlength="64" placeholder="••••">
+    <button class="gate-btn" id="gateBtn">SIGN IN</button>
+    <div class="gate-err" id="gateErr"></div>
+    <div class="gate-switch" id="gateSwitch"></div>
+    <div class="gate-fine" id="gateFine"></div>
+  </div>
+</div>
+
+<div class="tape" aria-hidden="true"><div class="tape-inner" id="tape"></div></div>
+
+<header>
+  <div class="kicker">Placement Desk · Est. 2026</div>
+  <h1>QUANT/DESK<span class="cursor"></span></h1>
+  <p class="sub">12 weeks per role, broken into daily-sized fills. Every fill paints today's cell on the heatmap and books points to the shared board. Small orders, every day — that's the whole game.</p>
+  <div class="whoami" id="whoami"></div>
+</header>
+
+<div class="board">
+  <div class="stat"><div class="lbl">P&amp;L (points)</div><div class="val pnl" id="stPts">+0</div></div>
+  <div class="stat"><div class="lbl">Desk rank</div><div class="val rank" id="stRank">Intern</div></div>
+  <div class="stat"><div class="lbl">Fills today</div><div class="val" id="stToday">0</div></div>
+  <div class="stat"><div class="lbl">Streak</div><div class="val" id="stStreak">0<small> days</small></div></div>
+</div>
+
+<main>
+  <section>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="track-note" id="trackNote"></div>
+    <div class="today-line" id="todayLine"></div>
+    <div id="weeks"></div>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h3>Activity · last 18 weeks</h3>
+      <div class="hm-wrap"><div class="hm" id="heatmap"></div></div>
+      <div class="hm-foot">
+        <span id="hmTotal">0 fills</span>
+        <span class="hm-scale">less
+          <i style="background:var(--hm0)"></i><i style="background:var(--hm1)"></i><i style="background:var(--hm2)"></i><i style="background:var(--hm3)"></i><i style="background:var(--hm4)"></i>
+        more</span>
+      </div>
+      <div class="hm-legend">0 · 1–2 · 3–5 · 6–9 · 10+ fills/day. Today is outlined.</div>
+    </div>
+    <div class="card">
+      <h3>Leaderboard <button class="mini" id="lbRefresh">REFRESH</button></h3>
+      <div id="lbList" class="lb-empty">Loading…</div>
+      <div class="lb-mypos" id="lbMyPos"></div>
+      <div class="fine" id="lbFine">Scores post automatically under your desk name.</div>
+    </div>
+    <div class="card">
+      <h3>Desk ladder</h3>
+      <div class="ladder" id="ladder"></div>
+      <button class="ghost-btn" id="resetBtn">RESET MY PROGRESS</button>
+    </div>
+  </aside>
+</main>
+
+<footer>Zetamac before breakfast. Codeforces before sleep. — QUANT/DESK v3.0</footer>
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
